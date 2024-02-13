@@ -11,8 +11,8 @@
     <header>
         <div class="container">
             <img id="avatar" class="profile-avatar" src="https://via.placeholder.com/180x180" alt=".">
-            <h1 id="nome" class="profile-name">Gian Souza</h1>
-            <h2 id="usuario" class="profile-username">@ogiansouza</h2>
+            <h1 id="nome" class="profile-name"></h1>
+            <h2 id="usuario" class="profile-username"></h2>
             <ul class="numbers">
                 <li class="numbers-item">
                     <h4>Repositórios</h4>
@@ -30,7 +30,6 @@
             <a href="#" id="link" class="profile-link">Ver no Github</a>
         </div>
     </header>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const avatar = document.querySelector('#avatar')
@@ -41,19 +40,23 @@
             const seguindo = document.querySelector('#seguindo')
             const link = document.querySelector('#link')
 
-            fetch('https://api.github.com/users/ogiansouza')
-            .then(function(res) {
+            try {
+                fetch('https://api.github.com/users/KauaOnoratoDev')
+                .then(function(res) {
                 return res.json()
-            })
-            .then(function(json) {
-                avatar.src = json.avatar_url;
-                nome.innerText = json.name;
-                usuario.innerText = json.login;
-                repositorios.innerText = json.public_repos;
-                seguidores.innerText = json.followers;
-                seguindo.innerText = json.following;
-                link.href = json.html_url;
-            })
+                })
+                .then(function(json) {
+                    avatar.src = json.avatar_url;
+                    nome.innerText = json.name;
+                    usuario.innerText = json.login;
+                    repositorios.innerText = json.public_repos;
+                    seguidores.innerText = json.followers;
+                    seguindo.innerText = json.following;
+                    link.href = json.html_url;
+                })
+            } catch(erro) {
+                alert('Error')
+            }
         })
     </script>
 </body>
