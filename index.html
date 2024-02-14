@@ -42,13 +42,15 @@
             if ('https://api.github.com/users/KauaOnoratoDev') {
             }
             const endpoint = 'https://api.github.com/users/KauaOnoratoDev'
-            try {
                 fetch(endpoint)
-                .then(function(res) {
-                    return res.json()
+                .then(function (res) {
+                    if (res.ok) {
+                        return res.json()
+                    }
+                    throw new Error()
                 })
-                .then(function(json) {
-                    if (json.avatar_url != undefined){
+                .then(function (json) {
+                    if (json.avatar_url != undefined) {
                         avatar.src = json.avatar_url;
                     }
                     if (json.name != undefined) {
@@ -69,11 +71,10 @@
                     if (json.html_url != undefined) {
                         link.href = json.html_url;
                     }
+                }).catch(function (json) {
+                    alert('Ocorreu um  erro de código')
+                    console.log(err)
                 })
-            } catch(err) {
-                alert('Ocorreu um  erro de código')
-                console.log(err)
-            }
         })
     </script>
 </body>
