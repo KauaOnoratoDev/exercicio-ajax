@@ -39,23 +39,40 @@
             const seguidores = document.querySelector('#seguidores')
             const seguindo = document.querySelector('#seguindo')
             const link = document.querySelector('#link')
-
+            if ('https://api.github.com/users/KauaOnoratoDev') {
+            }
+            const endpoint = 'https://api.github.com/users/KauaOnoratoDev'
             try {
-                fetch('https://api.github.com/users/KauaOnoratoDev')
+                fetch(endpoint)
                 .then(function(res) {
-                return res.json()
+                    return res.json()
                 })
                 .then(function(json) {
-                    avatar.src = json.avatar_url;
-                    nome.innerText = json.name;
-                    usuario.innerText = json.login;
-                    repositorios.innerText = json.public_repos;
-                    seguidores.innerText = json.followers;
-                    seguindo.innerText = json.following;
-                    link.href = json.html_url;
+                    if (json.avatar_url != undefined){
+                        avatar.src = json.avatar_url;
+                    }
+                    if (json.name != undefined) {
+                        nome.innerText = json.name;
+                    }
+                    if (json.login != undefined) {
+                        usuario.innerText = json.login;
+                    }
+                    if (json.public_repos != undefined) {
+                        repositorios.innerText = json.public_repos;
+                    }
+                    if (json.followers != undefined) {
+                        seguidores.innerText = json.followers;
+                    }
+                    if (json.following != undefined) {
+                        seguindo.innerText = json.following;
+                    }
+                    if (json.html_url != undefined) {
+                        link.href = json.html_url;
+                    }
                 })
-            } catch(erro) {
-                alert('Error')
+            } catch(err) {
+                alert('Ocorreu um  erro de código')
+                console.log(err)
             }
         })
     </script>
